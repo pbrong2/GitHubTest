@@ -50,5 +50,12 @@ public class MyBatisController {
         return hello;
     }
 
+	@RequestMapping(value = "/develop")
+    @ResponseBody
+    public User develop() {
+        //develop
+        User user = userMapper.selectByPrimaryKey(16);
+        return user;
+    }
 
 }
