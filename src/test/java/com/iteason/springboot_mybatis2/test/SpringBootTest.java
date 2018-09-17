@@ -111,4 +111,42 @@ public class SpringBootTest {
         }
 
     }
+
+    /**
+     * 测试redis缓存user集合
+     */
+
+    @Test
+    public void fun5(){
+        Gson gson = new Gson();
+        ValueOperations<String, String> ops = stringRedisTemplate.opsForValue();
+        //从redis中查询
+        List<User> userList = null;
+        String userListJson = null;
+        try {
+            userListJson = ops.get("userList");
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        if(userListJson != null ){
+            //缓存存在
+            System.out.println("缓存存在");
+            //使用Gson转成List<User>
+            userList = gson.fromJson(userListJson, new TypeToken<List<User>>() {}.getType());
+            for (User user : userList) {
+                System.out.println(user.getUsername());
+            }
+        }else{
+            //缓存不存在
+            System.out.println("缓存不存在");
+            UserExample example = new UserExample();
+            List<User> users = userMapper.selectByExample(example);
+            //存入缓存
+            ops.set("userList",gson.toJson(users),100000, TimeUnit.MILLISECONDS);
+            for (User user : users) {
+                System.out.println(user.getUsername());
+            }
+        }
+
+    }
 }
