@@ -60,6 +60,19 @@ public class SpringBootTest {
         ops.set("user",user,10000);
     }
 
+    /**
+     * Test
+     * 
+     */
+    @Test
+    public void fun5(){
+        ValueOperations<Object, Object> ops = redisTemplate.opsForValue();
+        User user = new User();
+        user.setUsername("arong");
+        user.setId(1);
+        ops.set("user",user,10000);
+    }
+
 
     /**
      * 测试redis缓存user集合
