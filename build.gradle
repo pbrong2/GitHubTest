@@ -1,0 +1,69 @@
+
+buildscript {
+	ext {
+		springBootVersion = '2.0.5.RELEASE'
+	}
+	repositories {
+		//	mavenCentral()
+		maven {
+			url 'http://maven.aliyun.com/nexus/content/groups/public/'
+		}
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+group = 'com.iteason'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+repositories {
+	//	mavenCentral()
+	maven {
+		url 'http://maven.aliyun.com/nexus/content/groups/public/'
+	}
+}
+
+dependencies {
+	//gson
+	compile group: 'com.google.code.gson', name: 'gson', version: '2.8.2'
+
+
+
+	//redis clienet
+	compile("redis.clients:jedis:2.9.0")
+	//commons pool
+	compile("org.apache.commons:commons-pool2:2.6.0")
+	//redis starter
+	compile("org.springframework.boot:spring-boot-starter-redis:2.0.4.RELEASE")
+	//redis data
+	compile("org.springframework.data:spring-data-redis:2.0.5.RELEASE")
+
+	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
+	compile('org.springframework.boot:spring-boot-starter-web')
+	compile('org.mybatis.spring.boot:mybatis-spring-boot-starter:1.3.2')
+	runtime('mysql:mysql-connector-java')
+
+	//单元测试
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+}
+
+
+
+//xml资源文件读取
+sourceSets {
+	main {
+		resources {
+			//可以将java目录下的所有非.java资源打包到classes下
+			srcDirs = ['src/main/java', 'src/main/resources']
+		}
+	}
+}
+
+

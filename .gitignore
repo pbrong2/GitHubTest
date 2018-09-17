@@ -1,8 +1,26 @@
-﻿/build/
-nothing
-测试2
+.gradle
+/build/
+!gradle/wrapper/gradle-wrapper.jar
 
-本地仓库修改，github pull
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
 
-修改github仓库的内容，然后再修改本地仓库的内容，pull后看出现什么问题
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+/out/
 
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
